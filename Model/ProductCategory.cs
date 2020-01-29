@@ -1,4 +1,5 @@
 ﻿namespace TinyCrm.Model
+
 {
     /// <summary>
     /// 
