@@ -1,15 +1,4 @@
-﻿using System;
-using Serilog;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TinyCrm.Model;
-using TinyCrm.Model.Options;
-using TinyCrm.Services;
-
-
-namespace TinyCrm
+﻿namespace TinyCrm
 {
     class Program
     {
