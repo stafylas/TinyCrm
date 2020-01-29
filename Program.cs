@@ -14,11 +14,13 @@
 
 
 
+
+
             var productService = new Services.ProductService();
             productService.AddProduct(
                 new Model.Options.AddProductOptions()
                 {
-                    Id = "123",
+                    Id = "1223",
                     Price = 13.33M,
                     ProductCategory = Model.ProductCategory.Cameras,
                     Name = "Camera 1"
@@ -26,7 +28,7 @@
             productService.AddProduct(
                 new Model.Options.AddProductOptions()
                 {
-                    Id = "456",
+                    Id = "3256",
                     Price = 13.33M,
                     ProductCategory = Model.ProductCategory.Cameras,
                     Name = "camera 2"
