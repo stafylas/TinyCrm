@@ -1,4 +1,9 @@
-﻿namespace TinyCrm
+﻿using System;
+using TinyCrm.Core.Model;
+
+using TinyCrm.Core.Model.Options;
+
+namespace TinyCrmConsole
 {
     class Program
     {
@@ -14,25 +19,25 @@
 
 
 
-            var productService = new Services.ProductService();
+            var productService = new TinyCrm.Core.Services.ProductService();
             productService.AddProduct(
-                new Model.Options.AddProductOptions()
+                new AddProductOptions()
                 {
                     Id = "123",
                     Price = 13.33M,
-                    ProductCategory = Model.ProductCategory.Cameras,
+                    ProductCategory =ProductCategory.Cameras,
                     Name = "Camera 1"
                 });
             productService.AddProduct(
-                new Model.Options.AddProductOptions()
+                new AddProductOptions()
                 {
                     Id = "456",
                     Price = 13.33M,
-                    ProductCategory = Model.ProductCategory.Cameras,
+                    ProductCategory = ProductCategory.Cameras,
                     Name = "camera 2"
                 });
             productService.UpdateProduct("123",
-                new Model.Options.UpdatedProductOptions()
+                new UpdatedProductOptions()
                 {
                     Price = 22.22M
                 });

@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TinyCrm.Model;
-using TinyCrm.Model.Options;
+using TinyCrm.Core.Model;
+using TinyCrm.Core.Model.Options;
 
 
 
-namespace TinyCrm.Services
+namespace TinyCrm.Core.Services
 {
    
     public class ProductService : IProductService
@@ -44,13 +44,13 @@ namespace TinyCrm.Services
                 return false;
             }
 
-            var product = new Product();
-            product.Id = options.Id;
-            product.Name = options.Name;
-            product.Price = options.Price;
-            product.ProductCategory = options.ProductCategory;
+            var newproduct = new Product();
+            newproduct.Id = options.Id;
+            newproduct.Name = options.Name;
+            newproduct.Price = options.Price;
+            newproduct.ProductCategory = options.ProductCategory;
 
-            ProductList.Add(product);
+            ProductList.Add(newproduct);
 
             return true;
         }

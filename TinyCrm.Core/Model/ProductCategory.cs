@@ -1,35 +1,38 @@
-﻿namespace TinyCrm.Model
+﻿namespace TinyCrm.Core.Model
 {
-   public class Product
+    /// <summary>
+    /// 
+    /// </summary>
+    public enum ProductCategory
     {
         /// <summary>
         /// 
         /// </summary>
-        public string Id { get; set; }
+        Invalid=0,
 
         /// <summary>
         /// 
         /// </summary>
-        public string Name { get; set; }
+        Cameras =1,
 
         /// <summary>
         /// 
         /// </summary>
-        public decimal Price { get; set; }
+        Laptops =2,
 
         /// <summary>
         /// 
         /// </summary>
-        public string Description { get; set; }
+        Computers = 3,
 
         /// <summary>
         /// 
         /// </summary>
-        public decimal Discount { get; set; }
+        Smartphones = 4,
 
         /// <summary>
         /// 
         /// </summary>
-        public ProductCategory ProductCategory { get; set; }    
+        Televisions = 5,
     }
 }
