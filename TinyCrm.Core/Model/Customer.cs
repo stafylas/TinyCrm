@@ -1,4 +1,6 @@
-﻿namespace TinyCrm.Core.Model
+﻿using System;
+
+namespace TinyCrm.Core.Model
 {
     /// <summary>
     /// 
@@ -34,5 +36,13 @@
         /// 
         /// </summary>
         public string Email { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public DateTimeOffset Created { get; set; }
+        
+
+
     }
 }

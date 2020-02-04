@@ -1,7 +1,10 @@
 ﻿using System;
 using TinyCrm.Core.Model;
+using TinyCrm.Core.Data;
+
 
 using TinyCrm.Core.Model.Options;
+using System.Linq;
 
 namespace TinyCrmConsole
 {
@@ -16,6 +19,23 @@ namespace TinyCrmConsole
             //    .CreateLogger();
             //Log.Error("this is an error");
             //Console.ReadKey();
+
+            var context = new TinyCrmDbContext();
+           // Console.WriteLine(context.Database.CanConnect());
+           // context.Database.EnsureCreated();
+
+            var p = new Product()
+            {
+                Id = "3455",
+                ProductCategory = ProductCategory.Computers,
+                Price = 99.99M,
+                Discount = 0
+            };
+
+           
+            context.Remove(p);
+            
+            context.SaveChanges();
 
 
 
