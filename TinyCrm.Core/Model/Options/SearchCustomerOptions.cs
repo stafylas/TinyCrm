@@ -22,5 +22,10 @@ namespace TinyCrm.Core.Model.Options
         /// 
         /// </summary>
         public string CustomerId { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public string Email { get; set; }
     }
 }

@@ -120,16 +120,54 @@ namespace TinyCrm.Core.Services
             if (string.IsNullOrWhiteSpace(id)) {
                 return null;
             }
-                
+            var search = searchProduct(id);
             var product = context.Set<Product>()
-                .Where(s => s.Id==id)  //pairnei ola ta stoixeia apo ti lista poy exoun id kai checkarei sth single an iparxei diplotipo
-                .SingleOrDefault();
+                .Where(b => b.Id.Equals(search)); 
                 
-            return product;
+                
+            return product.SingleOrDefault();
             
         }
-     }
-}
+        public bool readFile(string path)
+        {
+            string line;
 
+            System.IO.StreamReader file =
+                new System.IO.StreamReader(path);
+            while ((line = file.ReadLine()) != null) {
+                var words = line.Split(';');
+                var p = new Product();
+                p.Id = words[0];
+                p.Name = words[1];
+                p.Price = RandomPrice();
+                p.ProductCategory =(ProductCategory) RandomCategory();
+
+                context.Add(p);
+                context.SaveChanges();
+            }
+            return true;
+        }
+        public static decimal RandomPrice()
+        {
+            var num = (new Random().NextDouble() * (new Random()).Next(1000)).ToString("0.00");
+            var number = System.Convert.ToDecimal(num);
+            return number;
+        }
+        public static decimal RandomCategory()
+        {
+            var num=new Random().Next(5)+1;           
+            return num;
+        }
+      public  bool searchProduct(string productid) 
+        {
+
+            var searchproduct = context.Set<Product>()
+                .Where(s => s.Id == productid)  
+                .SingleOrDefault();
+
+            return true;
+        }
+    }
+    }
 
 

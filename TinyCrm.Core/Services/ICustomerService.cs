@@ -8,7 +8,7 @@ using TinyCrm.Core.Model.Options;
 
 namespace TinyCrm.Core.Services
 {
-    interface ICustomerService
+  public  interface ICustomerService
     {
         public bool CreateCustomer(Model.Options.CreateCustomerOptions options);
         ICollection<Model.Customer> SearchCustomer(SearchCustomerOptions options);

@@ -20,7 +20,7 @@ namespace TinyCrmConsole
             //    .CreateLogger();
             //Log.Error("this is an error");
             //Console.ReadKey();
-
+            
             var context = new TinyCrmDbContext() ;
            // Console.WriteLine(context.Database.CanConnect());
            context.Database.EnsureCreated();
@@ -86,6 +86,8 @@ namespace TinyCrmConsole
                 });
            Console.WriteLine(productService.GetProductById("12345"));
 
+            string path = @"C:/Users/KCA9/Downloads/kl-oop-master/kl-oop-master/products.csv";
+            productService.readFile(path);
         }
 
     }

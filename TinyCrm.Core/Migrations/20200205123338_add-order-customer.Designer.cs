@@ -3,53 +3,23 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TinyCrm.Core.Data;
 
 namespace TinyCrm.Core.Migrations
 {
     [DbContext(typeof(TinyCrmDbContext))]
-    partial class TinyCrmDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200205123338_add-order-customer")]
+    partial class addordercustomer
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "3.1.1")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity("TinyCrm.Core.Model.ContactPerson", b =>
-                {
-                    b.Property<int>("ContactPersonId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("CustomerId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("FirstName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("LastName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Phone")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Position")
-                        .HasColumnType("int");
-
-                    b.HasKey("ContactPersonId");
-
-                    b.HasIndex("CustomerId");
-
-                    b.ToTable("Contact");
-                });
 
             modelBuilder.Entity("TinyCrm.Core.Model.Customer", b =>
                 {
@@ -129,16 +99,9 @@ namespace TinyCrm.Core.Migrations
                     b.ToTable("Product");
                 });
 
-            modelBuilder.Entity("TinyCrm.Core.Model.ContactPerson", b =>
-                {
-                    b.HasOne("TinyCrm.Core.Model.Customer", null)
-                        .WithMany("Contacts")
-                        .HasForeignKey("CustomerId");
-                });
-
             modelBuilder.Entity("TinyCrm.Core.Model.Order", b =>
                 {
-                    b.HasOne("TinyCrm.Core.Model.Customer", "Customer")
+                    b.HasOne("TinyCrm.Core.Model.Customer", null)
                         .WithMany("Orders")
                         .HasForeignKey("CustomerId");
                 });
