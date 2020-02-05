@@ -17,6 +17,10 @@ namespace TinyCrm.Core.Data
             modelBuilder
                 .Entity<Product>()
                 .ToTable("Product");
+            modelBuilder
+               .Entity<Customer>()
+               .ToTable("Customer");
+
             //modelBuilder
             //    .Entity<Product>()
             //    .Property(p => p.Discount)

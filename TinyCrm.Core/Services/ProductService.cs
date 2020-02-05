@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TinyCrm.Core.Model;
 using TinyCrm.Core.Model.Options;
+using TinyCrm.Core.Data;
 
 
 
@@ -15,6 +16,16 @@ namespace TinyCrm.Core.Services
     {
         private List<Product>  ProductList = new List<Product>();
 
+        private readonly TinyCrmDbContext context;
+
+        public ProductService(TinyCrmDbContext ctx)  //na tin perasw pantoy
+        {
+            context = ctx??
+                throw new ArgumentNullException(nameof(ctx));
+        }
+         
+
+        
         public bool AddProduct(AddProductOptions options)
         {
             if (options == null) {
@@ -50,9 +61,12 @@ namespace TinyCrm.Core.Services
             newproduct.Price = options.Price;
             newproduct.ProductCategory = options.ProductCategory;
 
-            ProductList.Add(newproduct);
-
-            return true;
+            context.Add(newproduct);
+            var success = false;
+            try {
+                success=context.SaveChanges()>0;
+            }catch(Exception) { }
+            return success;
         }
 
 
@@ -97,8 +111,6 @@ namespace TinyCrm.Core.Services
                 return false;
             }
 
-            
-
             return true;
         }
 
@@ -108,15 +120,16 @@ namespace TinyCrm.Core.Services
             if (string.IsNullOrWhiteSpace(id)) {
                 return null;
             }
-
-                var product = ProductList
-                    .Where(s => s.Id.Equals(id))  //pairnei ola ta stoixeia apo ti lista poy exoun id kai checkarei sth single an iparxei diplotipo
-                    .SingleOrDefault();
-
-                return product;
-            }
+                
+            var product = context.Set<Product>()
+                .Where(s => s.Id==id)  //pairnei ola ta stoixeia apo ti lista poy exoun id kai checkarei sth single an iparxei diplotipo
+                .SingleOrDefault();
+                
+            return product;
+            
         }
-    }
+     }
+}
 
 
 

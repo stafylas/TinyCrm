@@ -1,6 +1,7 @@
 ﻿using TinyCrm.Core.Model.Options;
 using TinyCrm.Core.Model;
 
+
 namespace TinyCrm.Core.Services
 {
     interface IProductService

@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace TinyCrm.Core.Migrations
 {
@@ -6,6 +7,24 @@ namespace TinyCrm.Core.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "Customer",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Lastname = table.Column<string>(nullable: true),
+                    Firstname = table.Column<string>(nullable: true),
+                    Phone = table.Column<string>(nullable: true),
+                    VatNumber = table.Column<string>(nullable: true),
+                    Email = table.Column<string>(nullable: true),
+                    Created = table.Column<DateTimeOffset>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Customer", x => x.Id);
+                });
+
             migrationBuilder.CreateTable(
                 name: "Product",
                 columns: table => new
@@ -25,6 +44,9 @@ namespace TinyCrm.Core.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "Customer");
+
             migrationBuilder.DropTable(
                 name: "Product");
         }

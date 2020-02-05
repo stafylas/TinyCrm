@@ -12,7 +12,7 @@ namespace TinyCrm.Core.Model.Options
 
         public int CustomerId { get; set; }
 
-
+        public bool IsActive { get; set; }
        
 
     
