@@ -1,6 +1,6 @@
 ﻿namespace TinyCrm.Core.Model.Options
 {
-    public   class AddProductOptions
+    public class AddProductOptions
     {
         public string Id { get; set; }
 

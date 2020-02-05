@@ -1,4 +1,7 @@
-﻿namespace TinyCrm.Core.Model
+﻿using System;
+using System.Collections.Generic;
+
+namespace TinyCrm.Core.Model
 {
     /// <summary>
     /// 
@@ -34,5 +37,30 @@
         /// 
         /// </summary>
         public string Email { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public DateTimeOffset Created { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public bool IsActive { get; set; }
+
+
+        public ICollection<Order> Orders { get; set; }
+        public ICollection<ContactPerson> Contacts { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public Customer()
+        {
+            Created = DateTimeOffset.Now;
+            Orders = new List<Order>();
+            Contacts = new List<ContactPerson>();
+        }
+
     }
 }

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TinyCrm.Core.Model;
 using TinyCrm.Core.Model.Options;
+using TinyCrm.Core.Data;
 
 
 
@@ -15,6 +16,16 @@ namespace TinyCrm.Core.Services
     {
         private List<Product>  ProductList = new List<Product>();
 
+        private readonly TinyCrmDbContext context;
+
+        public ProductService(TinyCrmDbContext ctx)  //na tin perasw pantoy
+        {
+            context = ctx??
+                throw new ArgumentNullException(nameof(ctx));
+        }
+         
+
+        
         public bool AddProduct(AddProductOptions options)
         {
             if (options == null) {
@@ -50,9 +61,12 @@ namespace TinyCrm.Core.Services
             newproduct.Price = options.Price;
             newproduct.ProductCategory = options.ProductCategory;
 
-            ProductList.Add(newproduct);
-
-            return true;
+            context.Add(newproduct);
+            var success = false;
+            try {
+                success=context.SaveChanges()>0;
+            }catch(Exception) { }
+            return success;
         }
 
 
@@ -97,8 +111,6 @@ namespace TinyCrm.Core.Services
                 return false;
             }
 
-            
-
             return true;
         }
 
@@ -108,15 +120,54 @@ namespace TinyCrm.Core.Services
             if (string.IsNullOrWhiteSpace(id)) {
                 return null;
             }
+            var search = searchProduct(id);
+            var product = context.Set<Product>()
+                .Where(b => b.Id.Equals(search)); 
+                
+                
+            return product.SingleOrDefault();
+            
+        }
+        public bool readFile(string path)
+        {
+            string line;
 
-                var product = ProductList
-                    .Where(s => s.Id.Equals(id))  //pairnei ola ta stoixeia apo ti lista poy exoun id kai checkarei sth single an iparxei diplotipo
-                    .SingleOrDefault();
+            System.IO.StreamReader file =
+                new System.IO.StreamReader(path);
+            while ((line = file.ReadLine()) != null) {
+                var words = line.Split(';');
+                var p = new Product();
+                p.Id = words[0];
+                p.Name = words[1];
+                p.Price = RandomPrice();
+                p.ProductCategory =(ProductCategory) RandomCategory();
 
-                return product;
+                context.Add(p);
+                context.SaveChanges();
             }
+            return true;
+        }
+        public static decimal RandomPrice()
+        {
+            var num = (new Random().NextDouble() * (new Random()).Next(1000)).ToString("0.00");
+            var number = System.Convert.ToDecimal(num);
+            return number;
+        }
+        public static decimal RandomCategory()
+        {
+            var num=new Random().Next(5)+1;           
+            return num;
+        }
+      public  bool searchProduct(string productid) 
+        {
+
+            var searchproduct = context.Set<Product>()
+                .Where(s => s.Id == productid)  
+                .SingleOrDefault();
+
+            return true;
         }
     }
-
+    }
 
 
