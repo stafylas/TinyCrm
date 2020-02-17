@@ -2,26 +2,29 @@ using System;
 using Xunit;
 
 using TinyCrm.Core.Data;
+using Autofac;
+using TinyCrm.Core.Services;
+using System.Threading.Tasks;
+using TinyCrm.Core;
 
 namespace TinyCrm.Tests
 {
-    public partial class ProductServiceTests
+    public partial class ProductServiceTests : IClassFixture<TinyCrmFixture>
     {
         private readonly Core.Services.IProductService psvc_;
 
-        public ProductServiceTests()
+        public ProductServiceTests(TinyCrmFixture fixture)
         {
-            psvc_ = new Core.Services.ProductService(
-                new TinyCrmDbContext());
+            psvc_ = fixture.Container.Resolve<IProductService>();
+
         }
 
         [Fact]
-        public void GetProductById_Success()
+        public async Task GetProductById_Success()
         {
-            var product = psvc_.GetProductById("1112955");
+            var product =await psvc_.GetProductByIdAsync("1112955");
 
-            Assert.NotNull(product);
-            Assert.Equal(2500.00M, product.Price);
+            Assert.Equal(StatusCode.Ok, product.ErrorCode);
         }
 
         [Fact]

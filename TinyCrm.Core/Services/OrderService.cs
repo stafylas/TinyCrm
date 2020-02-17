@@ -21,7 +21,7 @@ namespace TinyCrm.Core.Services
             customers_ = customers;
         }
 
-        public Order CreateOrder(int customerId,
+        public  Order CreateOrder(int customerId,
             ICollection<string> productIds)
         {
             if (customerId <= 0) {

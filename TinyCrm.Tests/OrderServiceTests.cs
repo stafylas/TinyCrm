@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using Autofac;
 using TinyCrm.Core.Data;
 using TinyCrm.Core.Model;
@@ -27,7 +28,7 @@ namespace TinyCrm.Tests
         }
 
         [Fact]
-        public void CreateOrder_Success()
+        public async Task CreateOrder_Success()
 
         {
 

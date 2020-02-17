@@ -1,0 +1,44 @@
+﻿@model TinyCrmWeb.Models.CreateCustomerViewModel
+
+    <form method="post" action="@Url.Action("create","customer")">
+        <div class="form-group">
+            <label for="@Html.IdFor(c=>c.CreateOptions.VatNumber)">Vat Number</label>
+            @Html.TextBoxFor(c => c.CreateOptions.VatNumber, new { @class = "form-control" })
+            <small id="emailhelp" class="form-text text_muted">
+                Vat Number sould be 9 digits
+            </small>
+        </div>
+        <div class="form-group">
+            <label for="@Html.IdFor(c=>c.CreateOptions.FirstName)">First Name</label>
+            @Html.TextBoxFor(c => c.CreateOptions.FirstName, new { @class = "form-control" })
+            <small id="emailhelp" class="form-text text_muted">
+                Enter your first name
+            </small>
+        </div>
+        <div class="form-group">
+            <label for="@Html.IdFor(c=>c.CreateOptions.Email)">Email</label>
+            @Html.TextBoxFor(c => c.CreateOptions.Email, new { @class = "form-control" })
+            <small id="emailhelp" class="form-text text_muted">
+                Enter your Email
+            </small>
+        </div>
+        <div class="form-group">
+            <label for="@Html.IdFor(c=>c.CreateOptions.LastName)">Last Name</label>
+            @Html.TextBoxFor(c => c.CreateOptions.LastName, new { @class = "form-control" })
+            <small id="emailhelp" class="form-text text_muted">
+                Enter your last name
+            </small>
+        </div>
+        <div class="form-group">
+            <label for="@Html.IdFor(c=>c.CreateOptions.Phone)">Phone</label>
+            @Html.TextBoxFor(c => c.CreateOptions.Phone, new { @class = "form-control" })
+            <small id="emailhelp" class="form-text text_muted">
+                Enter your phone number
+            </small>
+        </div>
+        
+
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+
+    </form>
